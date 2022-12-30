@@ -20,13 +20,10 @@ func GetProvider() *provider.Provider {
 		TableList: GenTables(),
 		ClientMeta: schema.ClientMeta{
 			InitClient: func(ctx context.Context, clientMeta *schema.ClientMeta, config *viper.Viper) ([]any, *schema.Diagnostics) {
-				var gandiConfig gandi_client.Configs
+				var gandiConfig gandi_client.Config
 				err := config.Unmarshal(&gandiConfig)
 				if err != nil {
 					return nil, schema.NewDiagnostics().AddErrorMsg(constants.Analysisconfigerrs, err.Error())
-				}
-				if len(gandiConfig.Providers) == 0 {
-					gandiConfig.Providers = append(gandiConfig.Providers, gandi_client.Config{})
 				}
 
 				clients, err := gandi_client.NewClients(gandiConfig)
@@ -54,7 +51,7 @@ func GetProvider() *provider.Provider {
 #  - key: # The API Key (get it on your account: https://account.gandi.net/)`
 			},
 			Validation: func(ctx context.Context, config *viper.Viper) *schema.Diagnostics {
-				var gandiConfig gandi_client.Configs
+				var gandiConfig gandi_client.Config
 				err := config.Unmarshal(&gandiConfig)
 				if err != nil {
 					return schema.NewDiagnostics().AddErrorMsg(constants.Analysisconfigerrs, err.Error())
