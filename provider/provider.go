@@ -3,6 +3,7 @@ package provider
 import (
 	"context"
 	"github.com/selefra/selefra-provider-gandi/constants"
+	"os"
 
 	"github.com/selefra/selefra-provider-sdk/provider"
 	"github.com/selefra/selefra-provider-sdk/provider/schema"
@@ -24,6 +25,14 @@ func GetProvider() *provider.Provider {
 				err := config.Unmarshal(&gandiConfig)
 				if err != nil {
 					return nil, schema.NewDiagnostics().AddErrorMsg(constants.Analysisconfigerrs, err.Error())
+				}
+
+				if gandiConfig.Key == "" {
+					gandiConfig.Key = os.Getenv("GANDI_KEY")
+				}
+
+				if gandiConfig.Key == "" {
+					return nil, schema.NewDiagnostics().AddErrorMsg("missing key in configuration")
 				}
 
 				clients, err := gandi_client.NewClients(gandiConfig)

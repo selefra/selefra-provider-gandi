@@ -21,6 +21,6 @@ var (
 	Testing                                                                                                                             = "testing"
 	SELEFRADATABASEDSN                                                                                                                  = "SELEFRA_DATABASE_DSN"
 	Context                                                                                                                             = "context"
-	Hostuserpostgrespasswordpassportdbnamepostgressslmodedisable                                                                        = "host=127.0.0.1 user=postgres password=pass port=5432 dbname=postgres sslmode=disable"
+	Hostuserpostgrespasswordpassportdbnamepostgressslmodedisable                                                                        = "host=127.0.0.1 user=postgres password=password port=5432 dbname=postgres sslmode=disable"
 	NA                                                                                                                                  = "N/A"
 )
